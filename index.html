@@ -54,7 +54,7 @@ const createDivs = () => {
 
         //function for creator button to create new grid
     creator.addEventListener('click', newCanvas = () => {
-        container.textContent = '';
+        container.innerHTML = null;
         let inpud = Number(prompt('enter a number for the new grid. max 100 (e.g 96 = 96X96 grid)')); 
         input = inpud;
         createDivs();
