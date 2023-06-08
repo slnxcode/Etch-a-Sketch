@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Etch a Sketch</title>
+    </head>
+    <body>
+        <p>Let's play Etch a Sketch!</p>
+        <button id="create">Create Canvas</button>
+        <button id="reset">Reset Canvas</button>
+        <div id = 'container'></div>
+    </body>
+</html>
+
+<script>
+//create the HTML Elements on the page
+const body = document.querySelector('body');
+body.style.cssText = 'background-color: #85bdde';
+const headText = document.querySelector('p');
+headText.style.cssText = 'text-align: center; font-size: 30px';
+const creator = document.querySelector('#create');
+create.style.cssText = 'border-radius: 7px; background-color: lightgreen; padding: 10px; font-size: 14px; display: block; margin: 5px auto';
+const reset = document.querySelector('#reset');
+reset.style.cssText = 'border-radius: 7px; padding: 10px; font-size: 16px; display: block; margin: 10px auto';
+const container = document.querySelector('#container');
+container.style.cssText = 'border: 5px solid red; display: flex; flex-wrap: wrap; height: 400px; width: 400px; margin: 0 auto';
+
+//function for creating colored squares in the box
+
+let input = 16;
+
+const createDivs = () => {
+   iterate = input * input;
+   for (let i = 0; i < iterate; i++) {
+        const colorDiv = document.createElement('div');
+        container.appendChild(colorDiv);
+        colorDiv.style.width = `${100/input}%`;
+        colorDiv.style.height = `${100/input}%`;
+        //logic for changing colors of squares
+        let r = Math.floor(Math.random() * 257);
+        let g = Math.floor(Math.random() * 257);
+        let b = Math.floor(Math.random() * 257);
+        let randomRGB = `rgb(${r}, ${g}, ${b})`;
+        colorDiv.addEventListener('mouseover', () => {
+        colorDiv.style.backgroundColor = randomRGB;
+        });                
+   } 
+}
+ createDivs();
+    
+        //function for reset button to reload page
+        reset.addEventListener('click', () => {
+        location.reload();
+        });
+
+        //function for creator button to create new grid
+    creator.addEventListener('click', newCanvas = () => {
+        container.textContent = '';
+        let inpud = Number(prompt('enter a number for the new grid. max 100 (e.g 96 = 96X96 grid)')); 
+        input = inpud;
+        createDivs();
+            //logic for when user inputs a non integer
+        if (!Number.isInteger(input)) {
+            container.textContent = 'Oops! your entry must be a number';
+            container.style.cssText = 'font-size: 20px; text-align: center; margin-top: 90px';
+            setTimeout(function() {location.reload()}, 1800);
+        }
+    });
+
+</script>
